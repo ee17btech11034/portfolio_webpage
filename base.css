@@ -26,6 +26,23 @@ body {
     flex-shrink: 0; /*Keeps width constant */
     height: 100vh;
     padding: 2.5rem 1.5rem;
-    border-right: 1px solid #30363d; /* A think white line as a border */
+    border-right: 1px solid #414952; /* A think white line as a border */
     overflow-y: auto; /* Internal scroll if content grows */
+}
+
+.profile-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.experience-sidebar{
+    flex: 1;
+    padding: 3rem 4rem; /* Added margin-left to the whole section */
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.profile-sidebar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.experience-sidebar::-webkit-scrollbar{
+    display: none;
 }

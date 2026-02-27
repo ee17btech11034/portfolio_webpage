@@ -1,7 +1,5 @@
 .timeline-container {
     position: relative;
-    max-width: 800px;
-    margin: 0 auto;
     padding-left: 60px; /* Space for rope + dots */
 }
 
@@ -10,7 +8,7 @@
     left: 18px; /* Centered relative to the 40px dot space */
     top: 0;
     width: 4px;
-    height: 100%;
+    height: calc(100% - 4rem);
     background: #30363d;
     border-radius: 2px;
 }
@@ -48,6 +46,11 @@
     padding: 1.5rem;
     border-radius: 12px;
     transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.work-box:hover::before {
+    background: #58a6ff;
+    width: 50px; /* Arm grows to follow the shifting box */
 }
 
 .work-box:hover .work-content {
@@ -91,3 +94,17 @@
     color: #c9d1d9;
     line-height: 1.5;
 }
+
+.work-box::before {
+    content: "";
+    position: absolute;
+    left: -40px;
+    top: 31px;
+    width: 41px; /* Added 1px overlap to prevent visual gaps */
+    height: 2px;
+    background: #30363d;
+    z-index: 1;
+    transition: all 0.3s ease;
+    transform-origin: left; /* Arm grows from the dot */
+}
+

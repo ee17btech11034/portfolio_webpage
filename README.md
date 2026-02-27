@@ -17,3 +17,4 @@ Commit 3: Adding skills and Awards
 Commit 4: Move links to parallel to profile. And Create seperate CSS files for these as it is getting confusing.
         We are using sections instead of div for better readability. 
 Commit 5: Create a timeline rope for working exp (right side).
+Commit 6: Make timeline interactive
