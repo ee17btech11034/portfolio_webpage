@@ -14,3 +14,5 @@ Commit 2: adding the profile image, social links, web links.
 
 Phase 2: Technical Content 
 Commit 3: Adding skills and Awards
+Commit 4: Move links to parallel to profile. And Create seperate CSS files for these as it is getting confusing.
+        We are using sections instead of di for better readability. 

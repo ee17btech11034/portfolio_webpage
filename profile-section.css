@@ -1,0 +1,65 @@
+.img-and-links-section{
+    display: flex;
+    align-items: center; /* Aligns icons vertically with center of image */
+    gap: 20px;
+    margin-bottom: 1rem;
+}
+
+.profile-img {
+    width: 170px;
+    height: 160px;
+    border-radius: 16px;
+    object-fit: cover; /* use this full cover of 120*120px */
+    margin-bottom: 1.5rem; /* space between 2 lines 1rem = 16px (generally)*/
+    border: 1.8px solid #30363d;
+}
+
+.social-links {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates a 2x2 grid of icons */
+    gap: 22px;
+}
+
+.social-links a:hover {
+    color: #58a6ff;
+    transform: translateY(-2px);
+}
+
+
+.social-links a, .phone-tooltip {
+    color: #8b949e;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+/* Tooltip Reveal */
+.phone-tooltip { position: relative; }
+.tooltip-box {
+    visibility: hidden;
+    position: absolute;
+    bottom: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #21262d;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    border: 1px solid #30363d;
+    white-space: nowrap;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.phone-tooltip:hover .tooltip-box {
+    visibility: visible;
+    opacity: 1;
+}
+
+.phone-tooltip:hover{
+    color: #58a6ff;
+    transform: translateY(-2px);
+}

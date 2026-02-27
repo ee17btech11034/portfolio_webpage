@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*shows contain in a box type not till full width*/
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    /* line-height: 1.6 provides optimal vertical spacing for readability */
+    line-height: 1.6;
+}
+
+/* portfolio Wrapper */
+.portfolio-wrapper {
+    display: flex; /* want profile and exp section in parallel for big screens*/
+    width: 100%;
+    height: 100vh;
+}
+
+/* Profile side Styling (left) */
+.profile-sidebar {
+    width: 360px;
+    background-color: #161b22;
+    flex-shrink: 0; /*Keeps width constant */
+    height: 100vh;
+    padding: 2.5rem 1.5rem;
+    border-right: 1px solid #30363d; /* A think white line as a border */
+    overflow-y: auto; /* Internal scroll if content grows */
+}

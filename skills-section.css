@@ -1,0 +1,40 @@
+/* skills.css */
+.skills-section {
+    margin-top: 1rem;
+}
+
+.skill-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #c9d1d9;
+    margin: 1.2rem 0 0.6rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tags span {
+    background: #21262d;
+    border: 1px solid #30363d;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #8b949e;
+    transition: 0.2s;
+}
+
+/* Highlight for core skills */
+.skill-tags span.core {
+    border-color: rgba(88, 166, 255, 0.4);
+    color: #58a6ff;
+    background: rgba(88, 166, 255, 0.05);
+}
+
+.skill-tags span:hover {
+    background: #30363d;
+    color: #ffffff;
+    border-color: #58a6ff;
+}

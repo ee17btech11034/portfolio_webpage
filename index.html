@@ -4,71 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Raja Asiwal</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="profile-section.css">
+    <link rel="stylesheet" href="intro-section.css">
+    <link rel="stylesheet" href="skills-section.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="portfolio-wrapper"> <!-- div for whole poertfolio page -->
         <aside class="profile-sidebar"> <!--using aside for profile section-->
-            <div class="intro-section"> <!-- introduction-->
-                <div class="img-links-section"> <!-- div for profile img and links-->
-                    <img src="profile.jpg" alt="Profile Picture" class="profile-img">
-                </div>
-                <div class="description">
-                    <h1>Raja Asiwal</h1>
-                    <p>Developing the portfolio</p>
-                    <div class="contact-links">
-                        <a href="https://yourwebsite.com" target="_blank">Website🌐</a>
-                        <a href="mailto:yourname@email.com">📧 Email Me</a>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-icon">GitHub</a>
-                        <a href="#" class="social-icon">GitHub</a>
-                        <a href="#" class="social-icon">GitHub</a>
-                    </div>
-                </div>
-                <div class="skills-section">
-                    <h3 class="skill-heading">SKILLS</h3>
+
+            <section class="img-and-links-section"> <!-- Using sections for img and links-->
+                <img src="profile.jpg" alt="Profile Picture" class="profile-img">
                     
-                    <div class="skill-category">
-                        <h4 class="skill-sub-heading">PROGRAMMING</h4>
-                        <p class="skill-label">Languages:</p>
-                        <ul class="skill-list">
-                            <li><span>Advance:</span> C, Python</li>
-                            <li><span>Intermediate:</span> C++, Java</li>
-                            <li><span>Novice:</span> JavaScript, GNU make</li>
-                        </ul>
-
-                        <p class="skill-label">Framework & Library:</p>
-                        <div class="tag-cloud">
-                            <span>Node Js</span><span>Postman</span><span>Express Js</span><span>Pug Js</span>
-                            <span>Sklearn</span><span>Numpy</span><span>Pandas</span><span>Matplotlib</span>
-                            <span>React Js</span><span>Thunder Client</span>
-                        </div>
-
-                        <p class="skill-label">Technologies:</p>
-                        <div class="tag-cloud">
-                            <span>HTML</span><span>CSS</span><span>R-DBMS</span><span>MySQL</span><span>Git</span>
-                            <span>NoSQL</span><span>MongoDB</span><span>RestAPI</span>
-                        </div>
-
-                        <p class="skill-label">Tools/Applications:</p>
-                        <div class="tag-cloud">
-                            <span>GitHub Copilot</span><span>Microsoft Copilot</span><span>VS Code</span>
-                            <span>Jupyter</span><span>MATLAB</span><span>Windows</span><span>Ubuntu</span>
-                            <span>Azure</span><span>GitHub</span>
-                        </div>
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="mailto:yourname@email.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="#" title="Portfolio"><i class="fa-solid fa-globe"></i></a>
+                    <div class="phone-tooltip">
+                        <i class="fa-solid fa-phone"></i>
+                        <span class="tooltip-box">+91 7427087239</span>
                     </div>
                 </div>
-
-                <div class="awards-section">
-                    <h3 class="sidebar-heading">AWARDS</h3>
-                    <ul class="awards-simple">
-                        <li>🏆 Hackathon Winner - Global AI 2025</li>
-                        <li>🏅 Design Excellence - UI Challenge</li>
-                    </ul>
+            </section>
+            <section class="intro-section">
+                <div class="name-row">
+                    <h1><span class="first-name">Raja</span> <span class="last-name">Asiwal</span></h1>
+                    <span class="designation-badge">Software Engineer</span>
                 </div>
-            </div>
+                <p>Building portfolio</p>
+            </section>
+            <section class="skills-section">
+                <h3 class="skill-heading">SKILLS</h3>
+                    
+                <div class="skill-category">
+                    <!-- <h4 class="skill-sub-heading">Programming Skills</h4> -->
+                    <p class="skill-label">Programming Languages:</p>
+                    <div class="skill-tags">
+                        <span>C</span>
+                        <span>Python</span>
+                        <span>C++</span>
+                        <span>Java</span>
+                        <span>JavaScript</span>
+                        <span>GNU Make</span>
+                    </div>
+
+                    <p class="skill-label">Framework & Library:</p>
+                    <div class="skill-tags">
+                        <span>Node Js</span><span>Postman</span><span>Express Js</span><span>Pug Js</span>
+                        <span>Sklearn</span><span>Numpy</span><span>Pandas</span><span>Matplotlib</span>
+                        <span>React Js</span><span>Thunder Client</span>
+                    </div>
+
+                    <p class="skill-label">Technologies:</p>
+                    <div class="skill-tags">
+                        <span>HTML</span><span>CSS</span><span>R-DBMS</span><span>MySQL</span><span>Git</span>
+                        <span>NoSQL</span><span>MongoDB</span><span>RestAPI</span>
+                    </div>
+
+                    <p class="skill-label">Tools/Applications:</p>
+                    <div class="skill-tags">
+                        <span>GitHub Copilot</span><span>Microsoft Copilot</span><span>VS Code</span>
+                        <span>Jupyter</span><span>MATLAB</span><span>Windows</span><span>Ubuntu</span>
+                        <span>Azure</span><span>GitHub</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="awards-section">
+                <h3 class="skill-heading">ACHIEVEMENTS</h3>
+                <ul class="award-items">
+                    <li>🏆 Hackathon Winner - Global AI 2025</li>
+                    <li>🏅 Design Excellence - UI Challenge</li>
+                </ul>
+            </section>
         </aside>
 
         <main class="experience-sidebar"> <!--div to contain exp, projects-->
