@@ -8,6 +8,9 @@ The portfolio is split into two primary zones:
 - **Right Timeline:** A vertical journey of experiences and projects.
 
 ## Current Progress
-Phase 1:
+Phase 1: Basic Layout
 Commit 1: Create the basic dual-pane structure. A fixed sidebar on the left and a main content area on the right with a dark-themed aesthetic.
-commit 2: adding the profile image, social links, web links.
+Commit 2: adding the profile image, social links, web links.
+
+Phase 2: Technical Content 
+Commit 3: Adding skills and Awards

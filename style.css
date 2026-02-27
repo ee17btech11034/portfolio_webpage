@@ -78,6 +78,63 @@ body {
     border: 1px solid #30363d;
 }
 
+.skill-heading {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin: 2rem 0 1rem 0;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 5px;
+}
+
+.skill-sub-heading {
+    font-size: 0.8rem;
+    color: #58a6ff;
+    margin-bottom: 0.5rem;
+}
+
+.skill-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #c9d1d9;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.skill-list {
+    list-style: none;
+    font-size: 0.85rem;
+    color: #8b949e;
+    padding-left: 5px;
+}
+
+.skill-list li span {
+    color: #c9d1d9;
+    font-weight: 600;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+}
+
+.tag-cloud span {
+    font-size: 0.75rem;
+    background: #21262d;
+    border: 1px solid #30363d;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #8b949e;
+}
+
+.awards-simple {
+    list-style: none;
+    font-size: 0.85rem;
+    color: #c9d1d9;
+}
+
 /* Main Content Styling */
 .experience-sidebar {
     flex-grow: 1;
