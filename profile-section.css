@@ -6,12 +6,13 @@
 }
 
 .profile-img {
-    width: 170px;
-    height: 160px;
-    border-radius: 16px;
+    width: 150px;
+    height: 150px;
+    border-radius: 24px;
     object-fit: cover; /* use this full cover of 120*120px */
     margin-bottom: 1.5rem; /* space between 2 lines 1rem = 16px (generally)*/
     border: 1.8px solid #30363d;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
 .social-links {
@@ -62,4 +63,21 @@
 .phone-tooltip:hover{
     color: #58a6ff;
     transform: translateY(-2px);
+}
+
+/* Mobile Re-ordering */
+@media (max-width: 1024px) {
+    .img-and-links-section {
+        flex-direction: column; /* Pic on top, links below */
+        gap: 20px;
+    }
+    
+    /* Re-order elements in the sidebar */
+    .profile-sidebar {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .img-and-links-section { order: 1; } /* Pic + Links */
+    .name-row { order: 2; }               /* Name + Designation */
 }

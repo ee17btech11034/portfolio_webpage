@@ -1,137 +1,120 @@
 :root {
-    --color-exp: #10b981;    /* Emerald Green */
-    --color-proj: #f59e0b;   /* Amber Orange */
-    --bg-dark: #0d1117;      /* Darkest background */
-    --bg-card: #161b22;      /* Card background */
-    --border-dim: #30363d;   /* Muted border */
-    --text-main: #c9d1d9;    /* Light grey text */
+    --color-exp: #10b981;
+    --color-proj: #f59e0b;
+    --bg-dark: #0d1117;
+    --bg-card: #161b22;
+    --border-dim: #30363d;
+    --text-main: #c9d1d9;
+    --active-color: #30363d; /* Default rope color */
 }
 
-/* Header & Dual Underline */
+/* ... Keep all your existing Header Underline and Comet CSS untouched here ... */
 .experience-header { margin-bottom: 3rem; }
 .title-work { color: var(--color-exp); display: inline-block; margin: 0; font-size: 1.8rem; }
 .title-projects { color: var(--color-proj); display: inline-block; margin: 0; font-size: 1.8rem; }
 .title-separator { color: #8b949e; margin: 0 10px; font-size: 2rem; }
 
 .header-line {
-    height: 1.8px;
-    width: 100%;
-    margin-top: 8px;
-    border-radius: 20px;
+    height: 1.8px; width: 100%; margin-top: 8px; border-radius: 20px;
     background: linear-gradient(to right, var(--color-exp) 50%, var(--color-proj) 50%);
 }
 
-/* Timeline Layout */
-.timeline-container {
-    position: relative;
-    padding-left: 43px;
+.timeline-container { position: relative; padding-left: 43px; margin-top: 2rem; }
+.timeline-rope { position: absolute; left: 1px; top: 0; width: 1.5px; background: var(--border-dim); border-radius: 2px; z-index: 1;}
+
+@keyframes cometLoop {
+    0% { transform: translateY(-100px); opacity: 0; }
+    10% { opacity: 0.5; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(1000px); opacity: 0; }
 }
 
-/* The Rope */
-.timeline-rope {
-    position: absolute;
-    left: 1px;
-    top: 0;
-    width: 1.5px;
-    background: var(--border-dim);
-    border-radius: 2px;
-}
+.comet-v { position: absolute; left: -1px; width: 3.5px; height: 50px; background: linear-gradient(to top, var(--active-color), transparent); z-index: 10; opacity: 0; animation: cometLoop 4s linear infinite;}
+.timeline-container.is-hovering .comet-v { animation: none; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;}
+.comet-h { position: absolute; height: 2px; background: var(--active-color); box-shadow: 0 0 12px var(--active-color); z-index: 10; opacity: 0; width: 0;}
 
-/* --- COMET STYLES --- */
-
-/* Vertical Comet (Rope) */
-.comet-v {
-    position: absolute;
-    left: 0px; /* Centered on 1.5px rope */
-    width: 3.5px;
-    height: 40px;
-    background: linear-gradient(to top, var(--active-color), transparent);
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0;
-    border-radius: 2px;
-    animation: cometLoop 3s linear infinite;
-}
-
-/* Horizontal Spark (Dot to Box) */
-.comet-h {
-    position: absolute;
-    height: 2px;
-    background: var(--active-color);
-    box-shadow: 0 0 12px var(--active-color);
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0;
-    transition: width 0.2s ease-out, opacity 0.2s;
-}
-
-/* --- BOX & DOT BASE STYLES --- */
-
-.work-box {
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-/* The Arm (Connecting Line) */
-.work-box::before {
-    content: "";
-    position: absolute;
-    left: -42px;
-    top: 31px;
-    width: 43px;
-    height: 1px;
-    background: var(--border-dim);
-    z-index: 1;
-    transition: background 0.3s ease;
-}
-
-.timeline-dot {
-    position: absolute;
-    left: -25px;
-    top: 25px;
-    width: 12px;
-    height: 12px;
-    background: var(--bg-dark);
-    border: 3px solid var(--border-dim);
-    border-radius: 50%;
-    z-index: 2;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
+.work-box { position: relative; margin-bottom: 2rem; width: 100%; }
+.work-box::before { content: ""; position: absolute; left: -42px; top: 31px; width: 43px; height: 1px; background: var(--border-dim); z-index: 1; transition: background 0.3s ease; }
+.timeline-dot { position: absolute; left: -25px; top: 25px; width: 12px; height: 12px; background: var(--bg-dark); border: 3px solid var(--border-dim); border-radius: 50%; z-index: 2; transition: all 0.3s ease; }
+/* .work-content { background: var(--bg-card) !important; border: 2px solid var(--border-dim) !important; padding: 1.5rem; border-radius: 12px; transition: all 0.4s ease; position: relative; z-index: 2;} */
 .work-content {
-    background: var(--bg-card);
-    border: 2px solid var(--border-dim);
-    padding: 1.3rem;
-    border-radius: 12px;
-    transition: all 0.4s ease;
+    background: rgba(22, 27, 34, 0.7) !important;
+    backdrop-filter: blur(8px); /* Glassmorphism effect */
+    border: 1px solid rgba(48, 54, 61, 0.5) !important;
+    padding: 1.8rem;
+    border-radius: 20px; /* Highly rounded for aesthetic look */
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.dot-glow { background: var(--active-color) !important; border-color: var(--active-color) !important; box-shadow: 0 0 20px var(--active-color); transform: scale(1.3); }
+.box-glow { border-color: var(--active-color) !important; transform: translateX(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(255, 255, 255, 0.05); }
+
+
+/* --- FIX 2: Desktop Layout for Dynamic Header --- */
+.work-header {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Title left, Time right */
+    gap: 5px;
+    margin-bottom: 1rem;
+    /* align-items: baseline; */
 }
 
-/* --- ACTIVE STATES (TRIGGERED BY JS ONLY) --- */
+/* .work-title { grid-column: 1; grid-row: 1; font-size: 1.25rem; color: #fff; margin: 0; font-weight: 700; }
+.work-date { grid-column: 2; grid-row: 1; text-align: right; font-size: 0.85rem; font-weight: 700; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px; }
+.work-org { grid-column: 1; grid-row: 2; color: #8b949e; font-size: 1rem; font-weight: 500; margin: 0;}
+.work-loc { grid-column: 2; grid-row: 2; text-align: right; color: #8b949e; font-size: 0.9rem; } */
 
-/* When comet hits the dot */
-.dot-glow {
-    background: var(--active-color) !important;
-    border-color: var(--active-color) !important;
-    box-shadow: 0 0 20px var(--active-color);
-    transform: scale(1.3);
+.work-title { font-size: 1.3rem; color: #fff; font-weight: 800; grid-column: 1; }
+.work-date { font-size: 0.85rem; padding: 4px 12px; border-radius: 8px; background: rgba(255,255,255,0.03); grid-column: 2; }
+.work-org { color: #8b949e; font-weight: 500; grid-column: 1; grid-row: 2; }
+.work-loc { color: #8b949e; font-size: 0.85rem; grid-column: 2; grid-row: 2; text-align: right; }
+
+/* FIX 2: Bullet Point Styles */
+/* Aesthetic Points */
+.work-desc-list {
+    margin: 1rem 0 0 1.2rem;
+    padding: 0;
+    list-style: none;
 }
 
-/* When spark is traveling */
-.arm-glow::before {
-    background: var(--active-color) !important;
+.work-desc-list li {
+    position: relative;
+    margin-bottom: 10px;
+    color: #c9d1d9;
+    font-size: 0.92rem;
+    line-height: 1.5;
 }
 
-/* When spark hits the box */
-.box-glow {
-    border-color: var(--active-color) !important;
-    transform: translateX(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 
-                inset 0 0 10px rgba(255, 255, 255, 0.05);
+.work-desc-list li::before {
+    content: "▹"; /* Elegant bullet */
+    position: absolute;
+    left: -20px;
+    color: var(--active-color);
 }
 
-/* Typography */
-.work-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.work-title { font-size: 1.2rem; color: #fff; margin: 0; }
-.work-date { font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
-.work-org { color: #8b949e; font-size: 0.95rem; margin-bottom: 12px; font-weight: 500; }
-.work-desc { color: var(--text-main); font-size: 0.9rem; line-height: 1.6; }
+/* --- FIX 3: Mobile Reshuffle Logic --- */
+/* Mobile Line-by-Line Fixes */
+@media (max-width: 600px) {
+    .work-header {
+        grid-template-columns: 1fr; /* Single column stack */
+    }
+    
+    .work-title { grid-row: 1; font-size: 1.2rem; } /* Line 1: Designation */
+    .work-org   { grid-row: 2; color: #58a6ff; }    /* Line 2: Company name */
+    
+    /* Line 3: Date and Location in parallel */
+    .work-date { 
+        grid-row: 3; 
+        grid-column: 1; 
+        justify-self: start; 
+        background: none; 
+        padding: 0; 
+        color: #8b949e;
+    }
+    .work-loc { 
+        grid-row: 3; 
+        grid-column: 1; 
+        text-align: right; 
+        font-size: 0.8rem;
+    }
+}

@@ -1,48 +1,80 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /*shows contain in a box type not till full width*/
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: #0d1117;
     color: #c9d1d9;
-    /* line-height: 1.6 provides optimal vertical spacing for readability */
     line-height: 1.6;
+    /* FIX 1: Lock the body to exactly the window height */
+    height: 100vh;
+    overflow: hidden; 
 }
 
-/* portfolio Wrapper */
 .portfolio-wrapper {
-    display: flex; /* want profile and exp section in parallel for big screens*/
+    display: flex;
     width: 100%;
     height: 100vh;
 }
 
 /* Profile side Styling (left) */
 .profile-sidebar {
-    width: 360px;
+    width: 350px;
     background-color: #161b22;
-    flex-shrink: 0; /*Keeps width constant */
+    flex-shrink: 0;
     height: 100vh;
     padding: 2.5rem 1.5rem;
-    border-right: 1px solid #414952; /* A think white line as a border */
-    overflow-y: auto; /* Internal scroll if content grows */
+    border-right: 1px solid #414952;
+    /* FIX 1: Allows left side to scroll internally if content is long */
+    overflow-y: auto; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    flex-direction: column;
 }
 
 .profile-sidebar::-webkit-scrollbar {
     display: none;
 }
 
-.experience-sidebar{
+/* Experience Side Styling (Right) */
+.experience-sidebar {
     flex: 1;
-    padding: 3rem 4rem; /* Added margin-left to the whole section */
+    padding: 3rem 4rem;
+    height: 100vh;
+    /* FIX 1: Allows right side to scroll independently without pulling the body down */
+    overflow-y: auto; 
 }
-/* Hide scrollbar for IE, Edge and Firefox */
-.profile-sidebar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.experience-sidebar::-webkit-scrollbar{
+
+.experience-sidebar::-webkit-scrollbar {
     display: none;
+}
+
+/* FIX 3: Mobile Responsiveness Layout */
+@media (max-width: 1024px) {
+    body {
+        height: auto;
+        /* overflow: visible; Return scrolling to the whole body on mobile */
+        overflow-y: auto;
+    }
+    .portfolio-wrapper {
+        flex-direction: column;
+        height: auto;
+    }
+    .profile-sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #414952;
+        /* overflow-y: visible; */
+        align-items: center; /* Centers profile pic/links */
+        text-align: center;
+    }
+    .experience-sidebar {
+        height: auto;
+        padding: 2rem 1.5rem; /* Reduced padding for mobile */
+        /* overflow-y: visible; */
+    }
 }
