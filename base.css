@@ -22,17 +22,16 @@ body {
 
 /* Profile side Styling (left) */
 .profile-sidebar {
-    width: 350px;
+    width: 340px;
     background-color: #161b22;
     flex-shrink: 0;
     height: 100vh;
     padding: 2.5rem 1.5rem;
     border-right: 1px solid #414952;
-    /* FIX 1: Allows left side to scroll internally if content is long */
+    /* Allows left side to scroll internally if content is long */
     overflow-y: auto; 
     -ms-overflow-style: none;
     scrollbar-width: none;
-    flex-direction: column;
 }
 
 .profile-sidebar::-webkit-scrollbar {
@@ -44,16 +43,17 @@ body {
     flex: 1;
     padding: 3rem 4rem;
     height: 100vh;
-    /* FIX 1: Allows right side to scroll independently without pulling the body down */
+    /* Allows right side to scroll independently without pulling the body down */
     overflow-y: auto; 
 }
 
+.profile-sidebar::-webkit-scrollbar, 
 .experience-sidebar::-webkit-scrollbar {
     display: none;
 }
 
 /* FIX 3: Mobile Responsiveness Layout */
-@media (max-width: 1024px) {
+@media (max-width: 800px) {
     body {
         height: auto;
         /* overflow: visible; Return scrolling to the whole body on mobile */
@@ -69,8 +69,6 @@ body {
         border-right: none;
         border-bottom: 1px solid #414952;
         /* overflow-y: visible; */
-        align-items: center; /* Centers profile pic/links */
-        text-align: center;
     }
     .experience-sidebar {
         height: auto;

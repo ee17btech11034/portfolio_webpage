@@ -19,7 +19,7 @@
     background: linear-gradient(to right, var(--color-exp) 50%, var(--color-proj) 50%);
 }
 
-.timeline-container { position: relative; padding-left: 43px; margin-top: 2rem; }
+.timeline-container { position: relative; padding-left: 43px; margin-top: 2rem; max-width: 1000px;}
 .timeline-rope { position: absolute; left: 1px; top: 0; width: 1.5px; background: var(--border-dim); border-radius: 2px; z-index: 1;}
 
 @keyframes cometLoop {
@@ -42,7 +42,7 @@
     backdrop-filter: blur(8px); /* Glassmorphism effect */
     border: 1px solid rgba(48, 54, 61, 0.5) !important;
     padding: 1.8rem;
-    border-radius: 20px; /* Highly rounded for aesthetic look */
+    border-radius: 22px; /* Highly rounded for aesthetic look */
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
@@ -54,6 +54,9 @@
 .work-header {
     display: grid;
     grid-template-columns: 1fr auto; /* Title left, Time right */
+    grid-template-areas: 
+        "title date"
+        "org loc";
     gap: 5px;
     margin-bottom: 1rem;
     /* align-items: baseline; */
@@ -64,10 +67,10 @@
 .work-org { grid-column: 1; grid-row: 2; color: #8b949e; font-size: 1rem; font-weight: 500; margin: 0;}
 .work-loc { grid-column: 2; grid-row: 2; text-align: right; color: #8b949e; font-size: 0.9rem; } */
 
-.work-title { font-size: 1.3rem; color: #fff; font-weight: 800; grid-column: 1; }
-.work-date { font-size: 0.85rem; padding: 4px 12px; border-radius: 8px; background: rgba(255,255,255,0.03); grid-column: 2; }
-.work-org { color: #8b949e; font-weight: 500; grid-column: 1; grid-row: 2; }
-.work-loc { color: #8b949e; font-size: 0.85rem; grid-column: 2; grid-row: 2; text-align: right; }
+.work-title { grid-area: title; font-size: 1.3rem; color: #fff; font-weight: 800; }
+.work-date { grid-area: date; font-size: 0.85rem; font-weight: 700; text-align: right; color: var(--active-color); }
+.work-org { grid-area: org; color: #8b949e; font-weight: 500; }
+.work-loc { grid-area: loc; font-size: 0.85rem; color: #8b949e; text-align: right; }
 
 /* FIX 2: Bullet Point Styles */
 /* Aesthetic Points */
@@ -85,11 +88,27 @@
     line-height: 1.5;
 }
 
+/* .work-desc-list li::before {
+    content: "▹"; /* Elegant bullet 
+    position: absolute;
+    left: -20px;
+    color: var(--active-color);
+} */
 .work-desc-list li::before {
     content: "▹"; /* Elegant bullet */
     position: absolute;
     left: -20px;
-    color: var(--active-color);
+    color: #414952; /* Muted grey by default */
+    transition: color 0.4s ease;
+}
+/* 2. When an EXPERIENCE box is hovered, light up its bullets green */
+.work-box.type-experience:hover .work-desc-list li::before {
+    color: #10b981; /* Emerald Green */
+}
+
+/* 3. When a PROJECT box is hovered, light up its bullets orange */
+.work-box.type-project:hover .work-desc-list li::before {
+    color: #f59e0b; /* Amber Orange */
 }
 
 /* --- FIX 3: Mobile Reshuffle Logic --- */
@@ -97,24 +116,15 @@
 @media (max-width: 600px) {
     .work-header {
         grid-template-columns: 1fr; /* Single column stack */
+        grid-template-areas: 
+            "title"
+            "org"
+            "metaline"; /* Date + Loc merged into line 3 */
     }
-    
-    .work-title { grid-row: 1; font-size: 1.2rem; } /* Line 1: Designation */
-    .work-org   { grid-row: 2; color: #58a6ff; }    /* Line 2: Company name */
-    
-    /* Line 3: Date and Location in parallel */
-    .work-date { 
-        grid-row: 3; 
-        grid-column: 1; 
-        justify-self: start; 
-        background: none; 
-        padding: 0; 
-        color: #8b949e;
-    }
-    .work-loc { 
-        grid-row: 3; 
-        grid-column: 1; 
-        text-align: right; 
+    .work-date, .work-loc { 
+        display: inline-block; 
+        text-align: left; 
         font-size: 0.8rem;
     }
+    .work-date { margin-right: 15px; }
 }
