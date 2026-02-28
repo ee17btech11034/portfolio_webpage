@@ -1,30 +1,27 @@
 const journeyData = [
-    { type: 'exp', title: 'Software Engineer', date: '2026', org: 'Tech Corp', desc: 'Developing high-performance microservices.' },
-    { type: 'proj', title: 'AI Portfolio', date: '2025', org: 'Personal', desc: 'A dynamic timeline with comet animations.' },
-    { type: 'exp', title: 'Full Stack Intern', date: '2024', org: 'Startup Inc', desc: 'Optimized frontend rendering by 30%.' },
-    { type: 'proj', title: 'Data Visualizer', date: '2023', org: 'Open Source', desc: 'Interactive charts using D3.js.' }
+    { type: 'exp', title: 'Node.js Backend Developer', date: '2026', desc: 'Working on scalable microservices and cloud architecture.' },
+    { type: 'proj', title: 'Multiplayer Snake Game', date: '2025', desc: 'Real-time WebSockets implementation with Canvas API.' },
+    { type: 'exp', title: 'Frontend Intern', date: '2024', desc: 'React performance tuning and design system development.' },
+    { type: 'proj', title: 'Netflix Clone', date: '2025', desc: 'Advanced CSS Grid and responsive video streaming UI.' }
 ];
 
 const container = document.querySelector('.timeline-container');
 const rope = document.querySelector('.timeline-rope');
 
-// 1. Create the Comet element dynamically
-const comet = document.createElement('div');
-comet.className = 'comet';
-container.appendChild(comet);
+// 1. Create the two Comet parts (Vertical and Horizontal)
+const vComet = document.createElement('div');
+const hComet = document.createElement('div');
+vComet.className = 'comet-v';
+hComet.className = 'comet-h';
+container.appendChild(vComet);
+container.appendChild(hComet);
 
-// Helper function to get the exact Y position relative to the container
-function getRelativeY(element, parent) {
-    const rect = element.getBoundingClientRect();
-    const parentRect = parent.getBoundingClientRect();
-    return rect.top - parentRect.top;
-}
-
+// 2. Loop through your data to create the HTML
 journeyData.forEach((item, index) => {
-    // 2. Create the Work Box
     const box = document.createElement('div');
-    box.className = `work-box ${item.type === 'exp' ? 'type-experience' : 'type-project'}`;
-    const activeColor = item.type === 'exp' ? '#10b981' : '#f59e0b';
+    const isExp = item.type === 'exp';
+    box.className = `work-box ${isExp ? 'type-experience' : 'type-project'}`;
+    const color = isExp ? '#10b981' : '#f59e0b';
 
     box.innerHTML = `
         <div class="timeline-dot"></div>
@@ -33,53 +30,79 @@ journeyData.forEach((item, index) => {
                 <h2 class="work-title">${item.title}</h2>
                 <span class="work-date">${item.date}</span>
             </div>
-            <h3 class="work-org">${item.org}</h3>
             <p class="work-desc">${item.desc}</p>
         </div>
     `;
 
+    container.appendChild(box);
+
     const dot = box.querySelector('.timeline-dot');
     const content = box.querySelector('.work-content');
 
-    // 3. Hover Interaction Logic
+    // 3. The Animation Journey Logic
     box.addEventListener('mouseenter', () => {
-        // Set the current active color for CSS variables
-        // const activeColor = item.type === 'exp' ? '#10b981' : '#f59e0b';
-        container.style.setProperty('--active-color', activeColor);
-        
-        // Launch Comet from top to dot's Y position
-        const targetY = getRelativeY(dot, container); // Offset to center comet head on dot
-        comet.style.transform = `translateY(${targetY - 20}px)`;
-        comet.classList.add('active');
+        container.style.setProperty('--active-color', color);
 
-        // Step A: Dot glows when comet arrives (~350ms)
-        setTimeout(() => {
-            if (box.matches(':hover')) {
-                dot.classList.add('dot-active');
-                box.classList.add('arm-active');
-            }
-        }, 350);
+        // Get live coordinates
+        const cRect = container.getBoundingClientRect();
+        const dRect = dot.getBoundingClientRect();
+        const bRect = content.getBoundingClientRect();
 
-        // Step B: Content box glows and slides shortly after
+        // Calculate Y (center of dot) and X (distance to box)
+        const dotY = dRect.top - cRect.top + (dRect.height / 2);
+        const boxXStart = dRect.left - cRect.left + (dRect.width / 2);
+        const boxXEnd = bRect.left - cRect.left;
+
+        // A. RESET & START VERTICAL
+        vComet.style.transition = 'none';
+        vComet.style.transform = `translateY(-100px)`; 
+        vComet.style.opacity = '0';
+
+        // Small timeout to allow reset to trigger
         setTimeout(() => {
-            if (box.matches(':hover')) {
-                content.classList.add('content-active');
-            }
-        }, 500);
+            vComet.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.1s';
+            vComet.style.opacity = '1';
+            // Stop exactly at dot center (comet height is 40px)
+            vComet.style.transform = `translateY(${dotY - 40}px)`;
+        }, 10);
+
+        // B. REACH DOT (400ms after vertical starts)
+        setTimeout(() => {
+            if (!box.matches(':hover')) return;
+
+            vComet.style.opacity = '0'; // Hide vertical comet
+            dot.classList.add('dot-glow'); // Light up the dot
+
+            // Setup Horizontal Spark
+            hComet.style.top = `${dotY - 1}px`; // Align with dot center
+            hComet.style.left = `${boxXStart}px`;
+            hComet.style.width = '0';
+            hComet.style.opacity = '1';
+
+            // Grow Spark to Box
+            setTimeout(() => {
+                hComet.style.width = `${boxXEnd - boxXStart}px`;
+            }, 10);
+        }, 400);
+
+        // C. REACH BOX (600ms total)
+        setTimeout(() => {
+            if (!box.matches(':hover')) return;
+            content.classList.add('box-glow');
+            hComet.style.opacity = '0'; // Dissolve spark into the box
+        }, 600);
     });
 
     box.addEventListener('mouseleave', () => {
-        // Reset comet and all active classes
-        comet.classList.remove('active');
-        comet.style.transform = `translateY(-100px)`; // Move back up off-screen
-        dot.classList.remove('dot-active');
-        box.classList.remove('arm-active');
-        content.classList.remove('content-active');
+        // Instant Reset
+        vComet.style.opacity = '0';
+        hComet.style.opacity = '0';
+        hComet.style.width = '0';
+        dot.classList.remove('dot-glow');
+        content.classList.remove('box-glow');
     });
 
-    container.appendChild(box);
-
-    // 4. Set Rope length to the last dot center
+    // 4. Set Rope height to end at the center of the last dot
     if (index === journeyData.length - 1) {
         setTimeout(() => {
             rope.style.height = `${dot.offsetTop + 6}px`;
