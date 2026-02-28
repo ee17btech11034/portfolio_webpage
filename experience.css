@@ -1,110 +1,165 @@
-.timeline-container {
-    position: relative;
-    padding-left: 60px; /* Space for rope + dots */
+:root {
+    --color-exp: #10b981;    /* Emerald Green */
+    --color-proj: #f59e0b;   /* Amber Orange */
+    --bg-dark: #0d1117;      /* Darkest background */
+    --bg-card: #161b22;      /* Card background */
+    --border-dim: #30363d;   /* Muted border */
+    --text-main: #c9d1d9;    /* Light grey text */
 }
 
+/* Header & Dual Underline */
+.experience-header { margin-bottom: 3rem; }
+.title-work { color: var(--color-exp); display: inline-block; margin: 0; font-size: 1.8rem; }
+.title-projects { color: var(--color-proj); display: inline-block; margin: 0; font-size: 1.8rem; }
+.title-separator { color: #8b949e; margin: 0 10px; font-size: 2rem; }
+
+.header-line {
+    height: 1.8px;
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 20px;
+    background: linear-gradient(to right, var(--color-exp) 50%, var(--color-proj) 50%);
+}
+
+/* Timeline Layout */
+.timeline-container {
+    position: relative;
+    padding-left: 43px;
+}
+
+/* The Rope (Stops at last dot) */
 .timeline-rope {
     position: absolute;
-    left: 18px; /* Centered relative to the 40px dot space */
+    left: 1px;
     top: 0;
-    width: 4px;
-    height: calc(100% - 4rem);
-    background: #30363d;
+    width: 1.5px;
+    /* This calculation ensures the line ends at the top of the last box's arm */
+    height: calc(100% - 8.58rem); 
+    background: var(--border-dim);
     border-radius: 2px;
 }
 
 .work-box {
     position: relative;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
-/* The Glowing Node */
-.timeline-dot {
-    position: absolute;
-    left: -46px; /* Positions it exactly on the rope */
-    top: 25px;   /* Aligns with the first line of text */
-    width: 12px;
-    height: 12px;
-    background: #0d1117;
-    border: 3px solid #58a6ff;
-    border-radius: 50%;
-    z-index: 2;
-    box-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
-    transition: all 0.3s ease;
-}
-
-/* Hover Effect: When you hover the box, the dot glows brighter */
-.work-box:hover .timeline-dot {
-    background: #58a6ff;
-    transform: scale(1.3);
-    box-shadow: 0 0 20px rgba(88, 166, 255, 0.8);
-}
-
-.work-content {
-    background: #161b22;
-    border: 1px solid #30363d;
-    padding: 1.5rem;
-    border-radius: 12px;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-}
-
-.work-box:hover::before {
-    background: #58a6ff;
-    width: 50px; /* Arm grows to follow the shifting box */
-}
-
-.work-box:hover .work-content {
-    border-color: #58a6ff;
-    transform: translateX(10px);
-}
-
-.work-header {
-    display: flex;
-    justify-content: space-between; /* Pushes Title to left, Date to right */
-    align-items: baseline;        /* Aligns text bottoms nicely */
-    gap: 15px;
-    margin-bottom: 4px;
-}
-
-.work-title {
-    font-size: 1.3rem;
-    color: #ffffff;
-    font-weight: 700;
-}
-
-.work-date {
-    font-size: 0.85rem;
-    color: #58a6ff;
-    font-weight: 600;
-    white-space: nowrap; /* Keeps date on one line */
-    background: rgba(88, 166, 255, 0.1);
-    padding: 2px 8px;
-    border-radius: 4px;
-}
-
-.work-org {
-    font-size: 0.95rem;
-    color: #8b949e;
-    margin-bottom: 12px;
-    font-weight: 500;
-}
-
-.work-desc {
-    font-size: 0.9rem;
-    color: #c9d1d9;
-    line-height: 1.5;
-}
-
+/* The Arm (Connecting Line) */
 .work-box::before {
     content: "";
     position: absolute;
-    left: -40px;
+    left: -42px;
     top: 31px;
-    width: 41px; /* Added 1px overlap to prevent visual gaps */
-    height: 2px;
-    background: #30363d;
+    width: 43px;
+    height: 1px;
+    background: var(--border-dim);
     z-index: 1;
     transition: all 0.3s ease;
-    transform-origin: left; /* Arm grows from the dot */
 }
 
+/* The Glowing Nodes */
+.timeline-dot {
+    position: absolute;
+    left: -25px;
+    top: 25px;
+    width: 12px;
+    height: 12px;
+    background: var(--bg-dark);
+    border: 3px solid var(--border-dim);
+    border-radius: 50%;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Content Box Styling */
+.work-content {
+    background: var(--bg-card);
+    border: 2px solid var(--border-dim);
+    padding: 1.3rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+/* HOVER & COLOR LOGIC */
+
+/* Experience Styling (Green) */
+.type-experience .work-date { color: var(--color-exp); background: rgba(16, 185, 129, 0.1); }
+.type-experience .timeline-dot { border-color: var(--color-exp); }
+
+.type-experience:hover .timeline-dot {
+    background: var(--color-exp);
+    box-shadow: 0 0 15px var(--color-exp);
+    transform: scale(1.2);
+}
+.type-experience:hover .work-content { border-color: var(--color-exp); }
+.type-experience:hover::before { background: var(--color-exp); }
+
+/* Project Styling (Orange) */
+.type-project .work-date { color: var(--color-proj); background: rgba(245, 158, 11, 0.1); }
+.type-project .timeline-dot { border-color: var(--color-proj); }
+
+.type-project:hover .timeline-dot {
+    background: var(--color-proj);
+    box-shadow: 0 0 15px var(--color-proj);
+    transform: scale(1.2);
+}
+.type-project:hover .work-content { border-color: var(--color-proj); }
+.type-project:hover::before { background: var(--color-proj); }
+
+/* Interaction: Shift box right on hover */
+.work-box:hover .work-content {
+    transform: translateX(8px);
+}
+
+/* Typography Inside Boxes */
+.work-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.work-title { font-size: 1.2rem; color: #fff; margin: 0; }
+.work-date { font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+.work-org { color: #8b949e; font-size: 0.95rem; margin-bottom: 12px; font-weight: 500; }
+.work-desc { color: var(--text-main); font-size: 0.9rem; line-height: 1.6; }
+
+/* The Comet Shadow/Body */
+.comet {
+    position: absolute;
+    left: 1px; /* Centered on your 1.5px rope */
+    top:0;
+    width: 3px;
+    height: 60px;
+    background: linear-gradient(to top, var(--active-color), transparent);
+    border-radius: 2px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    /* Smooth 'slide' transition */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s;
+    transform: translateY(-100px); /* starts at top*/
+}
+
+.comet.active {
+    opacity: 1;
+}
+
+/* 1. Dot Glow State */
+.dot-active {
+    background: var(--active-color) !important;
+    border-color: var(--active-color) !important;
+    box-shadow: 0 0 15px var(--active-color), 0 0 30px var(--active-color);
+    transform: scale(1.3);
+}
+
+/* 2. Arm Glow State */
+.work-box.arm-active::before {
+    background: var(--active-color) !important;
+    width: 45px; /* Slight stretch effect */
+}
+
+/* 3. Box Glow State */
+.content-active {
+    border-color: var(--active-color) !important;
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(var(--active-rgb), 0.1);
+}
+
+/* Helper to handle RGB for the inset shadow */
+.type-experience { --active-rgb: 16, 185, 129; }
+.type-project { --active-rgb: 245, 158, 11; }
